@@ -24,10 +24,13 @@ jobs:
   deploy-production:
     name: Deploy to Production
     needs: deploy-staging
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: master
       - name: Install dependencies
         run: npm install
       - name: Deploy to Vercel
